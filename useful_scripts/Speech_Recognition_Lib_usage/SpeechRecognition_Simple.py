@@ -26,9 +26,9 @@ with harvard as source:
 with persian as source2:
     audio2 = r.record(source2)
 
-# print typ of objects
+# print type of objects
 print(type(audio))
-# Print what is my audio
+# Print text of my audio
 print(r.recognize_google(audio, language='en_US'))
 
 print(type(audio2))
