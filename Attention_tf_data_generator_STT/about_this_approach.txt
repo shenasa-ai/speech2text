@@ -1,0 +1,18 @@
+in this approach we decided to implement Attention base model + Teacher forcing algorithm.
+
+Also we used tf.tokenizor and tf.data . Also some preprocessing used .
+
+Attention type in this code is bahdanau attention. Feel free to change structure of Encoder Decoder to get 
+different accuracy.
+
+Steps :
+     1- preprocess Audios( I used MFCC, but you can use Spectrogram. There are comments which I said
+     how to change the code if you want to use Spectrogram). and save the result as numpy file.
+     
+     2- Preprocess the Texts. we will tokenize the words in character level mode. and give padding to shorer
+     sentences. We have 3 unique Symbol <START> <END> <PADDING>
+
+     3- Feed preprocessed Audios to Encoder 
+
+     4- Get Data From Encoder Feed it to Attention then, Feed attention output to Deoder and Loop over this
+
