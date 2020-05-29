@@ -1,3 +1,4 @@
+# Speech to Text
 
 This project is about building Speech Recognition System. We tried to cover useful techniques and implementations and to create good guid for developers who want develope such a system. In this repository we mentioned all the articles, github repos, and other sources for you too ( See Tutorial ). Type of models we used are : [ Attention mechanism, CTC , Teacher Forcing]
 
