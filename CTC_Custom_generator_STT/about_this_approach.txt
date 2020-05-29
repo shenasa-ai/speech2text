@@ -2,6 +2,11 @@ in this approach we decided to implement CTC for Speech to text.
 
 here we created a custom data generator but for better experince try tf.data
 
+NOTE : This implementation was heavily inspired by UDACITY speech recognition Course. Thanks to community
+for sharing their implementations. 
+
+Note2 : this sample code is trained on turkish language. feel free to use in other languages too.
+     I have commented codes that should be changed for other languages.
 
 Steps :
      1- preprocess Audios( I used Spectrogram, but you can use MFCC. There are comments which I said
