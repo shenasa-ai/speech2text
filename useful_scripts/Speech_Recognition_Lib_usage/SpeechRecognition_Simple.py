@@ -11,8 +11,9 @@
 """
 # import lib
 import speech_recognition as sr
+import os
 # Just say where is your directory
-PATH = '/home/masoudzb/Computer Science/AA_Sound_Intern/GitRepo/speech2text/useful_scripts/Speech_Recognition_Lib_usage/'
+PATH = os.getcwd() + '/useful_scripts/Speech_Recognition_Lib_usage/'
 # create object
 r = sr.Recognizer()
 # read those 2 files

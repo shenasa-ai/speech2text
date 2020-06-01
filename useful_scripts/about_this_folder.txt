@@ -1,0 +1,9 @@
+here you can find usefull scripts to use
+
+1- convert_video_to_transcirbed_audio.py. will help you to transcribe persian speaking videos to transcribed audios.
+
+2- create_dataSet.py with clips files. will teach you how to create a ready csv file from all your audios with their transcribes.
+
+3- youtube-dl.py will help you to install this library and download youtube videos.
+
+4- Speech_Recognition_Lib_usage folder is a guid to use google speech recognition system
