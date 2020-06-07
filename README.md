@@ -25,11 +25,11 @@ Some libraries you need to install. I'll list them here ( These are the most imp
 * ffmpeg
 * pydub
 * python_speech_features
-* numpy
-* pandas
-* tensorflow
-* sklearn
-* librosa
+* numpy V1.18.1
+* pandas V1.0.1
+* tensorflow  V2.1.0
+* sklearn V0.22.2.post1
+* librosa V0.7.2
 <br> <br>
 In next line I'll show how to install three of them ( I used these commands to install in Kaggle Notebooks too.)<br>
 `` 
@@ -58,12 +58,12 @@ Soon...
 
 As I mentioned before ( in installation ) we used some libs and frameworks : 
 
-* Tensorflow
+* Tensorflow V2.1.0
 * Keras
 * ffmpeg
 * pydub 
 * python speech features
-* librosa
+* librosa V0.7.2
 
 ## Contributing 🖇️
 
