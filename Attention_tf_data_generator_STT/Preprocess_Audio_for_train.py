@@ -3,7 +3,8 @@
 # TODO 2 : install pydub ffmpeg and other libs
 # TODO 3 : prepare other csv files too.
 # TODO 4 : create numpy file for other csv files too.
-# TODO 5 : Run this script on kaggle for turkey. With All Todos.
+# TODO 5 : Remove unnecessary imports
+# TODO 6 : Run this script on kaggle for turkey. With All Todos.
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
@@ -168,27 +169,27 @@ def spectrogram_from_file(filename, step=10, window=20, max_freq=None,
     return np.transpose(np.log(pxx[:ind, :] + eps))
 
 
-def text_to_int_sequence(text):
-    """ Convert text to an integer sequence """
-    int_sequence = []
-#     text = text.lower()
-#     print(text)
-    for c in text:
-#         print(c)
-        if c == ' ':
-            ch = char_map['<SPACE>']
-        else:
-            ch = char_map[c]
-        int_sequence.append(ch)
-    return int_sequence
+# def text_to_int_sequence(text):
+#     """ Convert text to an integer sequence """
+#     int_sequence = []
+# #     text = text.lower()
+# #     print(text)
+#     for c in text:
+# #         print(c)
+#         if c == ' ':
+#             ch = char_map['<SPACE>']
+#         else:
+#             ch = char_map[c]
+#         int_sequence.append(ch)
+#     return int_sequence
 
-def int_sequence_to_text(int_sequence):
-    """ Convert an integer sequence to text """
-    text = []
-    for c in int_sequence:
-        ch = index_map[c]
-        text.append(ch)
-    return text
+# def int_sequence_to_text(int_sequence):
+#     """ Convert an integer sequence to text """
+#     text = []
+#     for c in int_sequence:
+#         ch = index_map[c]
+#         text.append(ch)
+#     return text
 
 def calc_mfcc(filename):
     dim=26
