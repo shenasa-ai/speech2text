@@ -1,0 +1,136 @@
+using Mozilla deep speech V0.7.3 https://deepspeech.readthedocs.io/en/v0.7.0/TRAINING.html
+
+Here Is All you need to run this project ( Mozilla deep speech ) in your own computer with your own data or your own model.
+
+ ========================       Step 0.           ======================
+now it is version 0.7.3 of mozilla deep speech . here is the Link Doc to create your own model
+ If you are in iran Turn your VPN on.
+ 
+  https://deepspeech.readthedocs.io/en/v0.7.3/TRAINING.html
+
+
+as it says you should install python3 | Git Large Files | Mac or Linux Environment . NO WINDOWS
+
+
+ ========================       Step 1.           ======================
+- First of all clone the repository : git clone https://github.com/mozilla/DeepSpeech
+
+- then install git lfs and initialize in the sam erepository you cloned . help : https://askubuntu.com/questions/799341/how-to-install-git-lfs-on-ubuntu-16-04
+
+- Now reclone the repository. It may seem silly but you should do it. One the bellow should work for you.
+     use git lfs pull | git lfs fetch | git lfs update |  git  pull | git  fetch | git  update 
+
+-ok It is ok
+
+
+ ========================       Step 2.           ======================
+- Now you need To create a virtual Env.  
+    python3 -m venv $HOME/tmp/deepspeech-train-venv/
+
+- Then you should activate Virtual Environment  
+    source $HOME/tmp/deepspeech-train-venv/bin/activate
+
+- Now install Libs and dependencies
+    cd DeepSpeech
+    pip3 install --upgrade pip==20.0.2 wheel==0.34.2 setuptools==46.1.3
+    pip3 install --upgrade --force-reinstall -e .
+
+Note : You may need VPN. or if some libs cause error for install. restart your system and try again. that might help
+
+- The webrtcvad Python package might require you to ensure you have proper tooling to build Python modules:
+
+    sudo apt-get install python3-dev
+
+
+ ========================       Step 3.           ======================
+- If you have GPU access Follow Below codes
+
+    pip3 uninstall tensorflow
+    pip3 install 'tensorflow-gpu==1.15.2'
+
+as main doc sai you may face some issue like this : 
+tensorflow.python.framework.errors_impl.UnknownError: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+     [[{{node tower_0/conv1d/Conv2D}}]]
+
+Solution : Setting the TF_FORCE_GPU_ALLOW_GROWTH environment variable to true seems to help in such cases.
+ This could also be due to an incorrect version of libcudnn. Double check your versions with the TensorFlow 1.15 documentation.
+
+
+ ========================       Step 4.           ======================
+- then you ned to change the data to format which deep speech undrestand : 
+ command : bin/import_cv2.py --filter_alphabet path/to/some/alphabet.txt /path/to/extracted/language/archive
+
+filter_alphabet flag is so Important. check mozilla data to see how is the shape of this txt file. if you don't set this flag
+    it may cause many error while training. use this to ignore weird alphabete.
+
+Providing a filter alphabet is optional. It will exclude all samples whose transcripts contain characters not in the specified alphabet. Running the importer with -h will show you some additional options.
+
+Once the import is done, the clips sub-directory will contain for each required .mp3 an additional .wav file. It will also add the following .csv files:
+
+clips/train.csv
+
+clips/dev.csv
+
+clips/test.csv
+
+All entries in these CSV files refer to their samples by absolute paths. So moving this sub-directory would require another import or tweaking the CSV files accordingly.
+
+To use Common Voice data during training, validation and testing, you pass (comma separated combinations of) their filenames into --train_files, --dev_files, --test_files parameters of DeepSpeech.py.
+
+If, for example, Common Voice language en was extracted to ../data/CV/en/, DeepSpeech.py could be called like this:
+
+./DeepSpeech.py --train_files ../data/CV/en/clips/train.csv --dev_files ../data/CV/en/clips/dev.csv --test_files ../data/CV/en/clips/test.csv
+
+
+ ========================       Step 5.           ======================
+- Now every thing is ok Now check this simple training to see if every thing is ok.
+ command :    ./DeepSpeech.py --helpfull
+
+ if you see any SOX error see this webpage : https://github.com/mozilla/DeepSpeech/issues/1195
+
+
+if you have gpu this may help for faster training :  --automatic_mixed_precision flag.
+DeepSpeech.py --train_files ./train.csv --dev_files ./dev.csv --test_files ./test.csv --automatic_mixed_precision=True 
+
+Checkpointing
+- During training of a model so-called checkpoints will get stored on disk. This takes place at a configurable time interval.
+ The purpose of checkpoints is to allow interruption (also in the case of some unexpected failure) and later continuation of
+ training without losing hours of training time. Resuming from checkpoints happens automatically by just (re)starting training
+ with the same --checkpoint_dir of the former run. Alternatively, you can specify more fine grained options with
+ --load_checkpoint_dir and --save_checkpoint_dir, which specify separate locations to use for loading and saving
+ checkpoints respectively. If not specified these flags use the same value as --checkpoint_dir, ie. load from and
+ save to the same directory.
+
+- Be aware however that checkpoints are only valid for the same model geometry they had been generated from.
+ In other words: If there are error messages of certain Tensors having incompatible dimensions,
+ this is most likely due to an incompatible model change. One usual way out would be to wipe all
+ checkpoint files in the checkpoint directory or changing it before starting the training.
+
+
+ Note : Check all available falgs by : command :  ./DeepSpeech.py --helpfull
+
+
+ ========================       Step 6.           ======================
+- Now every thing is ok.
+
+for example use this Long command to start training. you can change many hyperparameters while training. but some like'
+n_hidden can't be changed while training.
+
+python3 DeepSpeech.py --train_files data/CV/en/clips/train.csv --dev_files data/CV/en/clips/dev.csv --test_files data/CV/en/clips/test.csv --checkpoint_dir data/load_save_checkpoint  --export_dir data/exprt_model --n_hidden 2048 --epochs 200 --learning_rate 0.0001 --automatic_mixed_precision --train_cudnn True
+
+ ========================       Step 7.           ======================
+As you continue as it's documentation you may face some errors which are not covered in doc.
+in this cases you can use Mozilla Forum.
+
+
+And here are some more errors which we faced :
+-1- ) Error for installing libraries
+
+solution : if You are in Iran check your VPN . it should be on.
+
+-2- ) After Doing all Steps as documentation there was error for training.
+solution : First time you clone the repository , some files do not exist. So you need to fetch or pull
+ it One more time. git pull repoLink | git fetch repoLink
+
+Step 3
+More Info for how to use flags and chekpoints. Soon ...
