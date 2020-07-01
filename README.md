@@ -9,6 +9,9 @@ And Also if you want to go in depth of theories and more, you can check Tutorial
 See **Deployment, Tutorial, Installation** to learn more about the project.
 
 
+## WIKI page 📖
+Visit our wiki page for more info about Tutorials, useful Links, Hardware Info, Result and other things. 
+
 ## About Folders 📁
 
 in each directory you can find a *.txt file which help you to know what is this folder for and how it can help you. make sure you read this txt file first
