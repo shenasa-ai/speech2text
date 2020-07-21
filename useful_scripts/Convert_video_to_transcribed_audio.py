@@ -14,7 +14,9 @@ and get text of what they are saying.
 # youtube-dl https://www.youtube.com/watch?v=59NrpQmwY0s
 
 
-# Step Two : Convert video to audio : more info at (http://www.savvyadmin.com/extract-audio-from-video-files-to-wav-using-ffmpeg/)
+# Step Two : Convert video to audio :
+#  more info at (http://www.savvyadmin.com/extract-audio-from-video-files-to-wav-using-ffmpeg/)
+# more info at : ( https://gist.github.com/whizkydee/804d7e290f46c73f55a84db8a8936d74 )
 # ffmpeg -i 1.webm -acodec pcm_s16le -ac 2 audio.wav
 
 # cut audio file to shorter audios. use any app. I use Audacity
@@ -31,7 +33,12 @@ harvard = sr.AudioFile(PATH + 'a_10s.wav')
 
 with harvard as source:
     audio = r.record(source)
+    
+for i in  range(1000):
+    print(r.recognize_google(audio, language='fa-IR'))
+    print(i)
+    print("====   ====")
 
-print(type(audio))
+# print(type(audio))
 
-print(r.recognize_google(audio, language='fa-IR'))
+# print(r.recognize_google(audio, language='fa-IR'))

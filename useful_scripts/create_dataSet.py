@@ -1,5 +1,7 @@
 """
 Here I assumed you've already read convert_to_transcribed_audio.py and youtube-dl.py and speech_recognition folder
+
+TODO : change the format of final csv
 """
 
 import pandas as pd

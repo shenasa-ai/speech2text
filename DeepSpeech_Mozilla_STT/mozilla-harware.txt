@@ -1,0 +1,28 @@
+1- search about what others did.
+
+
+
+hardware config :
+
+1- User asked for this hardware : hardware Info :  CPU 16 cores | SSD 240 GB | GPU - 4 Titan X pascal ( around 100 million ) OR 2 GTX 1080 TI ( around 90 million - we have one ) (Which one shall I get) | RAM - 32 GB    ====> answer : We do training on a set of TITAN X, so I think that with 4 of them, you should be able to get something useful over a set of 1000 hours within a week or so.  | dataset duration : 1000h | asked Question at : July of 2018 | Link : https://discourse.mozilla.org/t/hardware-required-for-deespeech-training/29914.
+
+2- an expert engineer answerd for training time on 0.1.1 version ( we use 0.7.X ) ====> answer : without more details on what you are trying to do, it’s hard to be more helpful. Full training of the previous 0.1.1 model on the whole set of data we have (several thousands of english audio) on something like 16x TITAN X GPUs would take around 1 week.
+
+3- mozilla hardware and data for release 0.2.1 ===>  train dataset duration : around 3000 hr,   hardware : 8 TitanX Pascal GPUs (12GB of VRAM),   result : 11% WER, epoch : 30, train_batch_size 24, dev_batch_size 48, test_batch_size 48
+
+4- mozilla hardware and data for release 0.3.0 ===>  train dataset duration : around 3000 hr,   hardware : 8 TitanX Pascal GPUs (12GB of VRAM),   result : 11% WER, epoch : 30, train_batch_size 24, dev_batch_size 48, test_batch_size 48
+
+
+5- mozilla hardware and data for release 0.4.1 === > rain dataset duration : around 3000 hr,   hardware : 8 TitanX Pascal GPUs (12GB of VRAM),   result : 8.26% WER, epoch : 30, train_batch_size 24, dev_batch_size 48, test_batch_size 48
+
+6- mozilla hardware and data for release 0.5.1 === > train dataset duration : around 3000 hr,   hardware : 8 TitanX Pascal GPUs (12GB of VRAM).,   result : 8.22% WER, epoch : 75, train_batch_size 24, dev_batch_size 48, test_batch_size 48
+ Note : The weights with the best validation loss were selected at the end of the 75 epochs using --noearly_stop. The selected model was trained for 467356 steps.
+
+7- mozilla hardware and data for release 0.6.1, Jan 2020 === > train dataset duration : around 5100 hr,   hardware : 8 Quadro RTX 6000 GPUs each with 24GB of VRAM,         result : 7.5% WER, epoch : 75, train_batch_size 128, dev_batch_size 128, test_batch_size 128
+
+Note : The weights with the best validation loss were selected at the end of 75 epochs using --noearly_stop, and the selected model was trained for 233784 steps. In addition the training used the --use_cudnn_rnn flag.
+
+
+8- mozilla hardware and data for release 0.7.1, May 2020 === > train dataset duration : around 5100 hr,   hardware :  server with 8 Quadro RTX 6000 GPUs each with 24GB of VRAM,         result : 5.97% WER, train_batch_size 128, dev_batch_size 128, test_batch_size 128
+phase 1 :  epoch : 125,  phase 2 :  epoch : 100,   phase 3 :  epoch : 100,
+ Note : The weights with the best validation loss were selected at the end of 100 epochs using --noearly_stop. The model selected under this process was trained for a sum total of 732522 steps over all phases.
