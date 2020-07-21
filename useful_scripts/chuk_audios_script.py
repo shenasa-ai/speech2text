@@ -1,3 +1,11 @@
+"""
+ALL scripts in theis directory are some part of final_script_to_create_dataset.py
+
+If you want to see final result of our work in creating dataset. check final_script_to_create_dataset.py file
+"""
+
+
+
 
 # be careful name of script is so Important. pydub.py or chunk.py will cause error.
 from pydub import AudioSegment

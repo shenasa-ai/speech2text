@@ -1,4 +1,11 @@
 """
+ALL scripts in theis directory are some part of final_script_to_create_dataset.py
+
+If you want to see final result of our work in creating dataset. check final_script_to_create_dataset.py file
+"""
+
+
+"""
     In this code I'll show you how to use speech_recognition lib for persian and english files.
     this library is used to transcribe your audio files. and can use many WebSerivces like :
     Google,IBM,Microsoft,..

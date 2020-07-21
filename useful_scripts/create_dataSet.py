@@ -1,8 +1,12 @@
-"""
-Here I assumed you've already read convert_to_transcribed_audio.py and youtube-dl.py and speech_recognition folder
 
-TODO : change the format of final csv
 """
+ALL scripts in theis directory are some part of final_script_to_create_dataset.py
+
+If you want to see final result of our work in creating dataset. check final_script_to_create_dataset.py file
+"""
+
+
+
 
 import pandas as pd
 import os

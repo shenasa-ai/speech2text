@@ -1,4 +1,12 @@
 """
+ALL scripts in theis directory are some part of final_script_to_create_dataset.py
+
+If you want to see final result of our work in creating dataset. check final_script_to_create_dataset.py file
+"""
+
+
+
+"""
 Okay, let's see how we can use libraries to downalod a video. then convert it to audio. then pass it to google 
 and get text of what they are saying.
 
