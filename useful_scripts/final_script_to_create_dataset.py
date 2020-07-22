@@ -7,7 +7,7 @@
 """
 directory guid to use this script
 
--parent dir
+-parent dir( here is useful_scripts )
     |
     |
     ------ clips
@@ -96,19 +96,24 @@ def transcribe_audios(audio_chunkec_path):
         audio_file_size = os.stat(audio_chunkec_path + audio_name).st_size
         with chunked_audio as source:
             audio = r.record(source)
-        audio_transcribe = r.recognize_google(audio, language='fa-IR')
-        print('========================================')
-        print(audio_transcribe)
+        audio_transcribe = ""
         print(audio_name)
-        print('========================================')
-        new_row = {'wav_filename' : audio_name,'wav_filesize' : audio_file_size,
-         'transcript' : audio_transcribe}
-        #append row to the dataframe
-        dataset_csv = dataset_csv.append(new_row, ignore_index=True)
-        # print(audio_name)
+        print(audio_transcribe)
+        try: 
+            audio_transcribe = r.recognize_google(audio, language='fa-IR')
+        except:
+            print("error is happening")
+            audio_transcribe = "ERROR"
+        finally:
+            new_row = {'wav_filename' : audio_name,'wav_filesize' : audio_file_size,
+            'transcript' : audio_transcribe}
+            # append row to the dataframe
+            dataset_csv = dataset_csv.append(new_row, ignore_index=True)
+            # NOTE : CHANGE NAME CHANGE NAME CHANGE NAME CHANGE NAME
+            dataset_csv.to_csv( os.getcwd() + "/useful_scripts/dorehami.csv", index=False)
     return dataset_csv
 
-# ===================================   use functions in your needs order ==========================
+# ===================================   use functions in your needs order ================================
 # extract_videos(videos, PATH_VIDEOS_SRC, PATH_EXTRACTED_AUDIO)
 
 # prepare_audios_to_be_chunked(PATH_EXTRACTED_AUDIO, PATH_CHUNKED_AUDIOS)
