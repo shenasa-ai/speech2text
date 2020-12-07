@@ -2,6 +2,47 @@
 
 This project is about building Speech Recognition System. We tried to cover useful techniques and implementations and to create good guid for developers who want develope such a system. In this repository we mentioned all the articles, github repos, and other sources for you too ( See Tutorial ). Type of models we used are : [ Attention mechanism, CTC , Teacher Forcing]
 
+# Models Output 🎯
+<p> many models tested but we have them here</p>
+<table width="100%">
+ <tr>
+   <th width="30%"> model Name  </th> 
+   <th width="70%"> DataSet </th> 
+   <th width="70%"> Loss  </th> 
+ </tr>
+
+<tr>
+   <td width="25%"> our own implementations : (first try) </td>
+   <td width="25%"> common_voice_en (400h) </td>
+ <td width="25%"> 74 ( So bad results / many models tested. ) </td>
+ </tr>
+
+ <tr>
+   <td width="25%">Deep Speech 1 : Mozilla (first try) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
+ <td width="25%"> 28 </td>
+ </tr>
+
+  <tr>
+   <td width="25%">Deep Speech 1 : Mozilla (second try) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
+ <td width="25%"> 24 </td>
+ </tr>
+
+  <tr>
+   <td width="25%">Deep Speech 1 : Mozilla + Transfer Learning (third try) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
+ <td width="25%"> 22</td>
+ </tr>
+
+  <tr>
+   <td width="25%">Deep Speech 2 : Tnesor_Speech (first try) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
+ <td width="25%"> Soon ... </td>
+ </tr>
+
+</table>
+
 ## Starting 🚀
 
 To have a copy of these project and retune it ( or change the structure if you want ) you need to have GPU for better experience, install some libraries and also You need DATA. We used Mozilla Deep Speech data ( shape of csv ) you can download them freely. [Mozilla Deep Spech data](https://voice.mozilla.org/en/datasets). <br>

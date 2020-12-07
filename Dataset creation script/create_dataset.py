@@ -19,7 +19,7 @@ directory guid to use this script
     ------ audios_chunked
     |
     |
-    myScript.py ( we are here right now )
+    create_dataset.py ( we are here right now )
     data.csv ( this will be your output )
 """
 """
