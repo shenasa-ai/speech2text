@@ -108,9 +108,7 @@ Download the proper language and then preprocessing. all the steps for preproces
 ‫‪python3‬‬ ‫‪DeepSpeech.py‬‬ ‫‪--train_files‬‬ ‫‪../data/CV/en/clips/train.csv‬‬ ‫‪--dev_files‬‬ \
 ‫‪../data/CV/en/clips/dev.csv‬‬ ‫‪--test_files‬‬ ‫‪../data/CV/en/clips/test.csv‬‬
 ```
-- Test your model with this `TEST_STT_MODEL.ipynb` file.
 
-Pretrained checkpoints of model is [here] (https://drive.google.com/drive/folders/1MEzzao1ksPcQzuMOU2KNGPfyh49Xs1Ll?usp=sharing).
 
 ### your own dataset
 if you want to create your own dataset you need these TIPS : 
