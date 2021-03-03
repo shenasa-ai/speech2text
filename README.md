@@ -1,13 +1,28 @@
-# Speech to Text
+# Speech to Text 🚀
+This repo create ASR system by using toolkits PLUS own implementations.
 
-This project is about building Speech Recognition System. We tried to cover useful techniques and implementations and to create good guid for developers who want develope such a system. In this repository we mentioned all the articles, github repos, and other sources for you too ( See Tutorial ). Type of models we used are : [ Attention mechanism, CTC , Teacher Forcing]
+
+Toolkits used: 
+- [Mozilla Deep Speech](#mozilla-deep-speech)
+- [DeepSpeech2](#deepspeech2) 
+- [Wave2vec](#wav2vec-20) 
+- [Jasper](#jasper) 
+- [Our Implementations](#my-own-implementations)
+
+<br>
+
+# Prerequisites 📋
+
+You need to know about RNNs, Attention mechanism, CTC, a little pandas/numpy, Tensorflow, KERAS and NLP Stuff(e.g. transformers, text cleaning etc. ). Also knowing about Spectrograms, MFCC, Filter Bank will help you to understand preprocess of audios. <br><br>
+if you don't know any of these stuff you can check Wiki page there are many links
+
+<br>
 
 # Models Output 🎯
-<p> many models tested but we have them here</p>
 <table width="100%">
  <tr>
    <th width="30%"> model Name  </th> 
-   <th width="70%"> DataSet </th> 
+   <th width="40%"> DataSet </th> 
    <th width="70%"> Loss  </th> 
  </tr>
 
@@ -26,44 +41,149 @@ This project is about building Speech Recognition System. We tried to cover usef
   <tr>
    <td width="25%">Deep Speech 1 : Mozilla (second try) </td>
    <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
- <td width="25%"> 24 </td>
+ <td width="25%"> 25</td>
  </tr>
 
   <tr>
    <td width="25%">Deep Speech 1 : Mozilla + Transfer Learning (third try) </td>
    <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
- <td width="25%"> 22</td>
+ <td width="25%"> 24</td>
+ </tr>
+
+  <tr>
+   <td width="25%">Deep Speech 1 : Mozilla + Transfer Learning (third try) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
+ <td width="25%"> 22 </td>
  </tr>
 
   <tr>
    <td width="25%">Deep Speech 2 : Tnesor_Speech (first try) </td>
-   <td width="25%"> common_voice + tv programms + radio programs (totally 300h) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
+ <td width="25%"> Soon ... </td>
+ </tr>
+
+  <tr>
+   <td width="25%">Wave2vec 2.0 </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
+ <td width="25%"> Soon ... </td>
+ </tr>
+
+   <tr>
+   <td width="25%"> Jasper </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
  <td width="25%"> Soon ... </td>
  </tr>
 
 </table>
 
-## Starting 🚀
 
-To have a copy of these project and retune it ( or change the structure if you want ) you need to have GPU for better experience, install some libraries and also You need DATA. We used Mozilla Deep Speech data ( shape of csv ) you can download them freely. [Mozilla Deep Spech data](https://voice.mozilla.org/en/datasets). <br>
-And Also if you want to go in depth of theories and more, you can check Tutorial Folder for links to sources and theories, articles and more.<br><br>
-See **Deployment, Tutorial, Installation** to learn more about the project.
+# Dataset we used 📁
+there are many public datasets for English. But for persian there is not enough and free STT dataset.So we created our own data crawler for collecting data.
 
-
-## WIKI page 📖
-Visit our wiki page for more info about Tutorials, useful Links, Hardware Info, Result and other things. 
-
-## About Folders 📁
-
-in each directory you can find a *.txt file which help you to know what is this folder for and how it can help you. make sure you read this txt file first
-
-## Prerequisites 📋
-
-You need to know about RNNs, Attention mechanism, CTC, a little pandas/numpy, Tensorflow and KERAS. and also knowing about Spectrograms, MFCC, Filter Bank will help you to understand preprocess of audios. nothing more <br><br>
-if you don't know any of these stuff you can check Tutorial Folder or search in web
+[common voice dataset](https://voice.mozilla.org/en/datasets) is a rich free dataset.<br>
 
 
-## Installation 🔧
+
+# Mozilla Deep Speech
+### clone and download common voice dataset 
+To use this toolkit you must first do what  [this link ](https://deepspeech.readthedocs.io/en/latest/TRAINING.html) says or follow short Installation blow.
+
+Currently we are using DeepSpeech V0.9.3
+
+#### Short Installation
+- Clone and create virtual enviroments
+```
+git clone --branch v0.9.3 https://github.com/mozilla/DeepSpeech
+cd DeepSpeech
+pip3 install --upgrade pip==20.2.2 wheel==0.34.2 setuptools==49.6.0
+pip3 install --upgrade -e .
+pip install tensorflow-gpu==1.15.4
+```
+
+After cloning and install dependecies you need [common voice dataset](https://voice.mozilla.org/en/datasets).
+Download the proper language and then preprocessing. all the steps for preprocess common voice dataset is documented in [here](https://deepspeech.readthedocs.io/en/latest/TRAINING.html) too.
+
+- Start training
+```
+‫‪python3‬‬ ‫‪DeepSpeech.py‬‬ ‫‪--train_files‬‬ ‫‪../data/CV/en/clips/train.csv‬‬ ‫‪--dev_files‬‬ \
+‫‪../data/CV/en/clips/dev.csv‬‬ ‫‪--test_files‬‬ ‫‪../data/CV/en/clips/test.csv‬‬
+```
+- Test your model with this `TEST_STT_MODEL.ipynb` file.
+
+Pretrained checkpoints of model is [here] (https://drive.google.com/drive/folders/1MEzzao1ksPcQzuMOU2KNGPfyh49Xs1Ll?usp=sharing).
+
+### your own dataset
+if you want to create your own dataset you need these TIPS : 
+*   all your audio files must be in wav format
+*   your audios must be in :  16khz / 16bitpersample / mono / no noise ( optional ) 
+*   don't use more than 30 minutes of audio files recorded by one person
+*   at least you must have 300h of data.
+*   you need a csv file for all the audio files you have. you can see the structure of csv file after you preprocessed the common voice files by import_cv2.py( this python file is in Deepspeech repo. you'll have it after cloning)
+*   and also you need to clean your transcripts (Some more NLP task :) ).
+*   (optional) if you want to use my crawler to create dataset you can check crawler.py (in crawler folder ) and parallel.py(in data_collector folder) file.
+*   (optional) if you want to use my transcription desktop application you can check [ciacada repository](https://github.com/shenasa-ai/cicada-audio-annotation-tool)
+*  ( optional ) you can use my scripts to clean transcripts and make final csv file. they are available in github
+* don't worry about creating spectrogram/FastFourier/MFCC/Filterbank , Mozilla will do it all for you.
+* TODO :  need to remember more tips.
+
+### Language model
+you need language model for testing the model. the language model is trained on [Kenlm](https://github.com/kpu/kenlm)
+
+the steps to train language model is [here](https://deepspeech.readthedocs.io/en/v0.9.3/Scorer.html)
+
+text file size : 2GB
+
+test file to optimize : 20M
+
+
+TIP : You can use just this language model :| not any other.
+<br>
+
+after all these steps it means you have your dataset ready and you want to train . if you want to train on English there is no more steps **BUT** if you are in another language ( like persian ) you need to check transfer learning part of [this link](https://deepspeech.readthedocs.io/en/latest/TRAINING.html#transfer-learning-new-alphabet)
+TIP : don't forget to change alphabete.txt
+
+Question : can I use Other languages checkpoints to start transfer learning? Sure, do it. But remember to drop weights of last N layers.
+
+you may need the meaning of flags to use all the abilities of mozilla deep speech. [check their Documentation](https://deepspeech.readthedocs.io/en/v0.9.3/Flags.html)
+
+Tip : if you faced with CUDA/CudNN errors. try to use conda and install proper versions.
+
+<br>
+<br>
+<hr>
+
+## DeepSpeech2
+using TensorSpeech
+[Link to repository](https://github.com/TensorSpeech/TensorFlowASR)
+their repo is really complete and you can pass their steps to train a model but I will say some tips : 
+
+*   to change any option you need to change config.yml file
+*   Remember to change alphabetes. you need to change the vocabulary in config.yml file
+* the dataset in this repo is a little different. you must have tsv file. and columns hav different names and values
+*   (optional) to prepare your own dataset for this approach you can use my script. it is available in github
+
+### Language model
+in this repo you can use any language model. even kenlm.
+
+
+<br>
+<hr>
+
+## Wav2vec 2.0
+using facebook fairseq toolkit
+SOON 
+
+
+<br>
+<hr>
+
+## Jasper
+using Nvidia NeMo Toolkit
+Soon
+
+## My Own Implementations
+
+### Installation 🔧
 
 Some libraries you need to install. I'll list them here ( These are the most important ) : <br>
 * ffmpeg
@@ -76,69 +196,36 @@ Some libraries you need to install. I'll list them here ( These are the most imp
 * librosa V0.7.2
 <br> <br>
 In next line I'll show how to install three of them ( I used these commands to install in Kaggle Notebooks too.)<br>
-`` 
+
+```
 pip install pydub
-`` 
-`` 
+```
+
+``` 
 pip install python_speech_features
-`` 
-`` 
+```
+
+``` 
 !apt-get install -y ffmpeg
-`` 
+``` 
+
+the codes are developed to use commonvoice data. make sure your data are in that format.
 
 
+# Hyperparameters
 
-## Running tests ⚙️
+all the steps for training models are documented in a txt file. they are uploaded in google drive. you can check there if needed.
 
-If you install all the libraries and your csv file is in right format you will test the code easily.
+<br>
+
+# WIKI page 📖
+Visit our wiki page for more info about Tutorials, useful Links, Hardware Info, Result and other things. 
 
 
+<br>
 
-## Deployment 📦
-
-Soon...
-
-## Built with 🛠️
-
-As I mentioned before ( in installation ) we used some libs and frameworks : 
-
-* Tensorflow V2.1.0
-* Keras
-* ffmpeg
-* pydub 
-* python speech features
-* librosa V0.7.2
-
-## Contributing 🖇️
+# Contributing 🖇️
 
 If you want to help us for better models and new approaches, please contact us, we will be happy
 <br>
 Email : Soon...
-
-
-
-
-
-## Authors ✒️
-
-To develope this system the are people who helped : 
-
-* **masoud Parpanchi** : research and code * -[Github Profile](https://github.com/masoudMZB)
-* **Alireza Akhavanpour** : Initial Work, helped for theories and techniques, guid * -[Github Profile](https://github.com/Alireza-Akhavan)
-
-
-## License 📄
-
-Soon...
-
-## Expressions of Gratitude 🎁
-
-* Tell others about this project 📢
-* Invite a beer 🍺 or coffee ☕ to someone on the team. 
-* Publicly thanks 🤓.
-* etc.
-
-
-
----
-⌨️ with ❤️ by [masoud](https://github.com/masoudMZB) 😊

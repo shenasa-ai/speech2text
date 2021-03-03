@@ -1,9 +1,9 @@
 # ========================= How To Use this Script =====================
 
-# TODO : Remove clips and audios files . each time you use
-# TODO : You Have to re fill clips and audios directory.
-# TODO : name properly each csvfile you will create as output.
-
+# TODO : Remove clips and audios files . each time you use  ======================= DONE =======================
+# TODO : You Have to re fill clips and audios directory. ======================= DONE =======================
+# TODO : name properly each csvfile you will create as output. ======================= DONE =======================
+# TODO : Separate audio files by their confidence level ======================= DONE =======================
 """
 directory guid to use this script
 
@@ -19,7 +19,7 @@ directory guid to use this script
     ------ audios_chunked
     |
     |
-    create_dataset.py ( we are here right now )
+    parallel.py ( we are here right now )
     data.csv ( this will be your output )
 """
 """
@@ -50,10 +50,12 @@ import requests
 import shutil
 from pydub.silence import split_on_silence
 import glob
-PATH_VIDEOS_SRC = os.getcwd() + '/clips/'
-PATH_EXTRACTED_AUDIO = os.getcwd() + '/audios/'
-PATH_CHUNKED_AUDIOS = os.getcwd() + '/audios_chunked/'
-PATH_NON_STOP_TALKER = os.getcwd() + '/NON_STOP_TALKER/'
+SEPRATOR = '\\'
+PATH_VIDEOS_SRC = os.getcwd() + SEPRATOR + 'clips' + SEPRATOR
+PATH_EXTRACTED_AUDIO = os.getcwd() + SEPRATOR + 'audios' + SEPRATOR
+PATH_CHUNKED_AUDIOS = os.getcwd() + SEPRATOR + 'audios_chunked' + SEPRATOR
+PATH_CHUNKED_AUDIOS_79 = os.getcwd() + SEPRATOR + 'audios_chunked_79' + SEPRATOR
+PATH_NON_STOP_TALKER = os.getcwd() + SEPRATOR + 'NON_STOP_TALKER' + SEPRATOR
 
 API_TOKEN = 'mgJdvEhrOJrbWIhM'
 
@@ -69,14 +71,15 @@ def extract_audio(video, output):
     # -n means neer override
     command = "ffmpeg -i {video} -acodec pcm_s16le -ac 1 -ar 16000 {output}".format(
         video=video, output=output)
-    subprocess.call(command, shell=True)
+    subprocess.call(command)
 
 
 def extract_videos(videos_array, source_path, dest_path):
     for video in videos:
         if video.split('.')[-1] == "mp4" or video.split('.')[-1] == 'mkv' or video.split('.')[-1] == 'webm':
-            extract_audio(source_path + video, dest_path +
-                          video.split('.')[0] + '.wav')
+            extract_audio(source_path + video, dest_path + video.split('.')[0] + '.wav')
+            os.remove(PATH_VIDEOS_SRC + video)
+
 
 
 def extract_mp3_from_wav_command(wav_file, output):
@@ -128,7 +131,7 @@ def slice_on_sokoot(audio, source_path, destination_path):
         # Export the audio chunk with new bitrate.
         print("Exporting chunk{0}.wav.".format(i))
         normalized_chunk.export(
-            "/"+destination_path + audio.split('.')[0] + "_{0}.wav".format(i),
+            destination_path + audio.split('.')[0] + "_{0}.wav".format(i),
             # bitrate = "192k",
             format="wav"
         )
@@ -162,6 +165,7 @@ def prepare_audios_to_be_chunked(extracted_audios_path, destination_path, format
     for audio in audios:
         # slice_one_audio_files(audio, extracted_audios_path, destination_path, format_flag, 10000)
         slice_on_sokoot(audio, PATH_EXTRACTED_AUDIO, PATH_CHUNKED_AUDIOS)
+        os.remove(PATH_EXTRACTED_AUDIO + audio)
 
 
 def update_audios_array(audio_chunkec_path, path_to_current_csv):
@@ -177,16 +181,17 @@ def update_audios_array(audio_chunkec_path, path_to_current_csv):
         pass
     return audio_files
 
-
 def transcribe_audios(audio_chunkec_path, csv_name):
     PATH_TO_CURRENT_CSV = os.getcwd() + f'/{csv_name}.csv'
-    audios_sanitized = update_audios_array(
-        PATH_CHUNKED_AUDIOS, PATH_TO_CURRENT_CSV)
-    if os.path.exists(PATH_TO_CURRENT_CSV):
+    PATH_TO_CURRENT_CSV_79 = os.getcwd() + f'/{csv_name}_79.csv'
+
+    audios_sanitized = update_audios_array(PATH_CHUNKED_AUDIOS, PATH_TO_CURRENT_CSV)
+    if os.path.exists(PATH_TO_CURRENT_CSV) and os.path.exists(PATH_TO_CURRENT_CSV_79):
         dataset_csv = pd.read_csv(PATH_TO_CURRENT_CSV, error_bad_lines=False)
-    else:
-        dataset_csv = pd.DataFrame(
-            columns=['wav_filename', 'wav_filesize', 'transcript', 'confidence_level'])
+        dataset_csv_79 = pd.read_csv(PATH_TO_CURRENT_CSV, error_bad_lines=False)
+    else:     
+        dataset_csv = pd.DataFrame(columns=['wav_filename', 'wav_filesize', 'transcript', 'confidence_level'])
+        dataset_csv_79 = pd.DataFrame(columns=['wav_filename', 'wav_filesize', 'transcript', 'confidence_level'])
     #  now let's loop over this audio files
     for audio_name in audios_sanitized:
         r = sr.Recognizer()
@@ -199,17 +204,16 @@ def transcribe_audios(audio_chunkec_path, csv_name):
                 with chunked_audio as source:
                     audio = r.record(source)
                 audio_transcribe = ""
-                # for confidence :
+                # for confidence : 
                 #  -1 means google couldn't detect any speech.
                 #  -2 means detected some but all are weak.
-                #  -3 Error happend.
+                #  -3 Error happend. 
                 #  [0, 1] means real probability.
                 confidence = -1
                 print(audio_name)
-                try:
+                try: 
                     # print('beore request')
-                    audio_transcribe = r.recognize_google(
-                        audio, language='fa-IR', show_all=True)
+                    audio_transcribe = r.recognize_google(audio, language='fa-IR', show_all=True)
                     # print('after request')
 
                 except:
@@ -218,83 +222,48 @@ def transcribe_audios(audio_chunkec_path, csv_name):
                     confidence = -3
                 finally:
                     print(audio_transcribe)
-                    if len(audio_transcribe) > 0 and type(audio_transcribe) != str:
+                    if len(audio_transcribe) > 0 and type(audio_transcribe) != str :
                         if 'confidence' in audio_transcribe['alternative'][0]:
-                            confidence = audio_transcribe['alternative'][0]['confidence']
-                        else:
-                            confidence = -2
-                        new_row = {'wav_filename': audio_name, 'wav_filesize': audio_file_size,
-                                   'transcript': audio_transcribe['alternative'][0]['transcript'],
-                                   'confidence_level': confidence}
-                    else:
-                        new_row = {'wav_filename': audio_name, 'wav_filesize': audio_file_size,
-                                   'transcript': 'Google_Detected_No_Speech',
-                                   'confidence_level': confidence}
-
+                             confidence = audio_transcribe['alternative'][0]['confidence']
+                        else : confidence = -2
+                        new_row = {'wav_filename' : audio_name,'wav_filesize' : audio_file_size,
+                        'transcript' : audio_transcribe['alternative'][0]['transcript'],
+                        'confidence_level' : confidence }
+                    else :
+                        new_row = {'wav_filename' : audio_name,'wav_filesize' : audio_file_size,
+                        'transcript' : 'Google_Detected_No_Speech',
+                        'confidence_level' : confidence }
+                    
                     # # append row to the dataframe
-                    dataset_csv = dataset_csv.append(
-                        new_row, ignore_index=True)
-                    dataset_csv.to_csv(os.getcwd() + "/" +
-                                       csv_name + ".csv", index=False)
+
+                    # here we will check 
+                    if confidence > 0.75 :
+                        print('this one should mv to another place and save in another csv.')
+                        dataset_csv_79 = dataset_csv_79.append(new_row, ignore_index=True)
+                        shutil.move(audio_chunkec_path + audio_name, PATH_CHUNKED_AUDIOS_79)
+                    else : 
+                        dataset_csv = dataset_csv.append(new_row, ignore_index=True)
+                    
+                    dataset_csv.to_csv( os.getcwd() + "/" + csv_name + ".csv", index=False)
+                    dataset_csv_79.to_csv( os.getcwd() + "/" + csv_name + '_79' + ".csv", index=False)
+                    
+                    
         else:
-            shutil.move(audio_chunkec_path + audio_name, PATH_NON_STOP_TALKER)
+            print(f"I Removed {audio_name}")
+            os.remove(audio_chunkec_path + audio_name)
     return dataset_csv
 
 
-def transcribe_irani(audio_chunked_path, api_token):
-    for audio_name in os.listdir(audio_chunked_path)[0:1]:
-        URL = "https://www.iotype.com/api/recognize/file"
-        files = {'file': open(audio_chunked_path + audio_name, 'rb')}
-        PARAMS = {'token': api_token}
-        r = requests.post(url=URL, params=PARAMS, files=files)
-        data = r.json()
-        print(data)
-
-
-# ========================================================
-        # CHANGE CSV SUFFIX AND FORMAT #
-# ========================================================
-def change_file_name_suffix(row):
-    array_of_wave_file_no_suffix = row.wav_filename.split('.')[:-1]
-    array_of_wave_file_no_suffix.insert(
-        len(array_of_wave_file_no_suffix), 'mp3')
-    return '.'.join(array_of_wave_file_no_suffix)
-
-
-def save_csv_file(df, csv_file_name):
-    # df['mostafa_koon'] = df.apply(change_file_name_suffix ,axis=1)
-    df['wav_filename'] = df.apply(change_file_name_suffix, axis=1)
-    df.to_csv(os.getcwd() + f'/{csv_file_name}.csv',
-              index=False, encoding='utf-8-sig')
 
 
 # ===================================  My Own Testing ================================
-# extract_videos(videos, PATH_VIDEOS_SRC, PATH_EXTRACTED_AUDIO)
+extract_videos(videos, PATH_VIDEOS_SRC, PATH_EXTRACTED_AUDIO)
 
 # NOTE : YOU SHOULD FIND THRESHHOLD AND LENGTH FOR EACH PROGRAMM. that is unique for them.
-# prepare_audios_to_be_chunked(PATH_EXTRACTED_AUDIO, PATH_CHUNKED_AUDIOS, 'wav')
-
-# extract_mp3_from_wav(audios, PATH_EXTRACTED_AUDIO, PATH_EXTRACTED_AUDIO)
-
+prepare_audios_to_be_chunked(PATH_EXTRACTED_AUDIO, PATH_CHUNKED_AUDIOS, 'wav')
 
 # NOTE : *******************************************  CHANGE NAME CHANGE NAME CHANGE NAME  *******************************************
-mycsv = transcribe_audios(PATH_CHUNKED_AUDIOS, 'program_name')
+mycsv = transcribe_audios(PATH_CHUNKED_AUDIOS, 'Payam_Shabangahi_Sobhgahi_Do_Yek')
 # NOTE : *******************************************  CHANGE NAME CHANGE NAME CHANGE NAME  *******************************************
-mycsv.to_csv(os.getcwd() + "/program_name.csv", index=False)
+mycsv.to_csv(os.getcwd() + "/Payam_Shabangahi_Sobhgahi_Do_Yek.csv", index=False)
 
-# dataFrame = pd.read_csv( os.getcwd() + '/test.csv')
-# save_csv_file(dataFrame, 'khandevanehPartElevenMP3')
-
-# ================================================  /My own testing ================================================================
-
-
-# NOTE : در فراخوانی تابع نام فایل اکسل را درست وارد کنید. نام تکراری با فایل های قبلی ندهید
-# NOTE : حتما بررسی کنید فولدر های موجود در ابتدا خالی باشند. به جز فولدر مربوط به فیلم ها یا همان کلیپز
-# def extract_chunk_transcribe(csv_name):
-#     extract_videos(videos, PATH_VIDEOS_SRC, PATH_EXTRACTED_AUDIO)
-#     prepare_audios_to_be_chunked(PATH_EXTRACTED_AUDIO, PATH_CHUNKED_AUDIOS, 'wav')
-#     mycsv = transcribe_audios(PATH_CHUNKED_AUDIOS, csv_name)
-#     mycsv.to_csv( os.getcwd() + "/ " + csv_name + ".csv", index=False)
-
-
-# extract_chunk_transcribe('FILE_NAME')

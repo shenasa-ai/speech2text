@@ -1,6 +1,0 @@
-In this tutorial folder you'll find best Websites, best Articles, best Tutorial links and etc..
-about speech to text projects.
-
-These Group of files are so useful for those who want to develope a STT system.
-
-Dataset_creation.pdf : this file will guid you to create your own speech to text dataset.
