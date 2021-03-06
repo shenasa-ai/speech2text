@@ -4,10 +4,10 @@
 this folder contain my crawler to crawl radio data.
 
 
-TIP : If your OS is Linux change SEPRATOR variable to '/' if you are in windows set to '\\'
-
+TIP : If your OS is Linux change SEPRATOR variable to '/' if you are in windows set to \\\
+ 
 <br>
-
+ 
 ```
 you should have this directories to be able to run this code.
 
