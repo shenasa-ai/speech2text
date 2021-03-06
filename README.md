@@ -11,6 +11,12 @@ Toolkits used:
 
 <br>
 
+TIP : If you want to just use the scripts( text_cleaning / data_collecting/ create final dataset csv files) simply use requirements.txt to install important dependencies.
+```
+pip3 install requirements.txt
+```
+
+
 # Prerequisites 📋
 
 You need to know about RNNs, Attention mechanism, CTC, a little pandas/numpy, Tensorflow, KERAS and NLP Stuff(e.g. transformers, text cleaning etc. ). Also knowing about Spectrograms, MFCC, Filter Bank will help you to understand preprocess of audios. <br><br>

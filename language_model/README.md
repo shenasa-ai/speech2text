@@ -1,6 +1,8 @@
 # Create language model 
 
-in this folder I will share what we did to create our language model.
+in this folder I will share what we did to create our language model. 
+
+Question : Why I need these scripts? to create your language model you need to clean your text files and create one csv file for training. So these all will help you.
 
 ## text cleaning
 all the text corpuses are dirty and need preprocess. to clean your txt files (for persian) use clean_text.py
