@@ -88,7 +88,14 @@ there are many public datasets for English. But for persian there is not enough 
 
 [common voice dataset](https://voice.mozilla.org/en/datasets) is a rich free dataset.<br>
 
+### How to use our script to collect data
+in this repo there are 2 folders:
+-  **data collector** 
+- **crawler**
 
+**crawler** : this folder has one script. the script will crawl in radio archive and collect the data we need. you can edit this crawler to download other websites too. [More info Check README file in crawler folder]
+
+**data collector**  : this folder contain one script too. the script will change format of your video files to wav, then slice them and will find transcript for them.you can set the treshhold for script, this threshold will be the confidence level for collecting dataset. the output will be csv files and wav audio files. [More info Check README file in data collector folder]
 
 # Mozilla Deep Speech
 ### clone and download common voice dataset 
