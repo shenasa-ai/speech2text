@@ -89,13 +89,12 @@ there are many public datasets for English. But for persian there is not enough 
 [common voice dataset](https://voice.mozilla.org/en/datasets) is a rich free dataset.<br>
 
 ### How to use our script to collect data
-in this repo there are 2 folders:
--  **data collector** 
+in this repo there is 1 folders:
 - **crawler**
 
 **crawler** : this folder has one script. the script will crawl in radio archive and collect the data we need. you can edit this crawler to download other websites too. [More info Check README file in crawler folder]
 
-**data collector**  : this folder contain one script too. the script will change format of your video files to wav, then slice them and will find transcript for them.you can set the treshhold for script, this threshold will be the confidence level for collecting dataset. the output will be csv files and wav audio files. [More info Check README file in data collector folder]
+
 
 # Part of Our Dataset V0.1 📁 ⚡🔥
 Here in Hamtech Company, we decided to open source a challenging part of our ASR dataset. This Dataset is near 30 Hours of voice plus CSV file which includes the transcription. you can find a column named Confidence_level, this means how much the transcription is reliable, here is the, you can use LM(language models) or any other idea to clean them or any other ideas. The variety of speakers in this dataset is not so much But the quality of voices is good enough. Check Dataset Folder in this repo. In conclusion :
