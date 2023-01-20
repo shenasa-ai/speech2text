@@ -103,10 +103,12 @@ Here in Hamtech Company, we decided to open source our ASR dataset. This Dataset
 * wav files are nearly 200Gb. 
 * voices format is : format : Wav / channels : mono/ sample_rate : 16000 Hz/ 
 
-Dataset_part_1_v2 : https://drive.google.com/drive/folders/1ZsTMb_V-UAXxxi-wRE-g4hXXntonA_P3?usp=share_link
-Dataset_part_2_v2 : https://drive.google.com/drive/folders/1eAPjF_DVU9j4nQ8S0aWQTbCbTI5sBrYp?usp=share_link
-Dataset_part_3_v2 : https://drive.google.com/drive/folders/1rMNYwKtkyz8tprhwErrcDT-TLKtWA0OB?usp=share_link
-Dataset_part_4_v2 : https://drive.google.com/drive/folders/1Lxq8ouA6UWEOkHfNjxJ7Kf5k51D5t2V8?usp=share_link
+Links : 
+
+- Dataset_part_1_v2 : https://drive.google.com/drive/folders/1ZsTMb_V-UAXxxi-wRE-g4hXXntonA_P3?usp=share_link
+- Dataset_part_2_v2 : https://drive.google.com/drive/folders/1eAPjF_DVU9j4nQ8S0aWQTbCbTI5sBrYp?usp=share_link
+- Dataset_part_3_v2 : https://drive.google.com/drive/folders/1rMNYwKtkyz8tprhwErrcDT-TLKtWA0OB?usp=share_link
+- Dataset_part_4_v2 : https://drive.google.com/drive/folders/1Lxq8ouA6UWEOkHfNjxJ7Kf5k51D5t2V8?usp=share_link
 
 NOTE : if you need more tips dont hesitate to email me  : masoudparpanchi@gmail.com
 
