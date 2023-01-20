@@ -95,6 +95,20 @@ in this repo there is 1 folders:
 **crawler** : this folder has one script. the script will crawl in radio archive and collect the data we need. you can edit this crawler to download other websites too. [More info Check README file in crawler folder]
 
 
+# Full DataSet (Part 1. part 2 will be uploaded soon ) 📁 ⚡🔥
+Here in Hamtech Company, we decided to open source our ASR dataset. This Dataset is near 200Gb of voice plus CSV file which includes the transcription(some files contain txt file not csv). you can find a column named Confidence_level, this means how much the transcription is reliable, here is the, you can use LM(language models) or any other idea to clean them or any other ideas. . In conclusion :
+
+* You may use some techniques ( like using LMs, using annotator, etc. ) to clean more the transcription
+* you can use the confidence_level column in the CSV file to select more accurate rows.
+* wav files are nearly 200Gb. 
+* voices format is : format : Wav / channels : mono/ sample_rate : 16000 Hz/ 
+
+Dataset_part_1_v2 : https://drive.google.com/drive/folders/1ZsTMb_V-UAXxxi-wRE-g4hXXntonA_P3?usp=share_link
+Dataset_part_2_v2 : https://drive.google.com/drive/folders/1eAPjF_DVU9j4nQ8S0aWQTbCbTI5sBrYp?usp=share_link
+Dataset_part_3_v2 : https://drive.google.com/drive/folders/1rMNYwKtkyz8tprhwErrcDT-TLKtWA0OB?usp=share_link
+Dataset_part_4_v2 : https://drive.google.com/drive/folders/1Lxq8ouA6UWEOkHfNjxJ7Kf5k51D5t2V8?usp=share_link
+
+NOTE : if you need more tips dont hesitate to email me  : masoudparpanchi@gmail.com
 
 # Part of Our Dataset V0.1 📁 ⚡🔥
 Here in Hamtech Company, we decided to open source a challenging part of our ASR dataset. This Dataset is near 30 Hours of voice plus CSV file which includes the transcription. you can find a column named Confidence_level, this means how much the transcription is reliable, here is the, you can use LM(language models) or any other idea to clean them or any other ideas. The variety of speakers in this dataset is not so much But the quality of voices is good enough. Check Dataset Folder in this repo. In conclusion :
@@ -239,7 +253,19 @@ the codes are developed to use commonvoice data. make sure your data are in that
 
 # Hyperparameters
 
-all the steps for training models are documented in a txt file. they are uploaded in google drive. you can check there if needed.
+WIll be uploaded soon
+
+<br>
+
+# Language model
+
+WIll be uploaded soon
+
+<br>
+
+# Language model dataset
+
+WIll be uploaded soon
 
 <br>
 
