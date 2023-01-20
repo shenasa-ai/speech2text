@@ -13,7 +13,7 @@ Toolkits used:
 
 TIP : If you want to just use the scripts( text_cleaning / data_collecting/ create final dataset csv files) simply use requirements.txt to install important dependencies.
 ```
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 
 
