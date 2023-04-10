@@ -6,7 +6,6 @@ Toolkits used:
 - [Mozilla Deep Speech](#mozilla-deep-speech)
 - [DeepSpeech2](#deepspeech2) 
 - [Wave2vec](#wav2vec-20) 
-- [Jasper](#jasper) 
 - [Our Implementations](#my-own-implementations)
 
 <br>
@@ -62,23 +61,6 @@ if you don't know any of these stuff you can check Wiki page there are many link
  <td width="25%"> 22 </td>
  </tr>
 
-  <tr>
-   <td width="25%">Deep Speech 2 : Tnesor_Speech (first try) </td>
-   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
- <td width="25%"> Soon ... </td>
- </tr>
-
-  <tr>
-   <td width="25%">Wave2vec 2.0 </td>
-   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
- <td width="25%"> Soon ... </td>
- </tr>
-
-   <tr>
-   <td width="25%"> Jasper </td>
-   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
- <td width="25%"> Soon ... </td>
- </tr>
 
 </table>
 
@@ -95,7 +77,7 @@ in this repo there is 1 folders:
 **crawler** : this folder has one script. the script will crawl in radio archive and collect the data we need. you can edit this crawler to download other websites too. [More info Check README file in crawler folder]
 
 
-# Full DataSet (Part 1. part 2 will be uploaded soon ) 📁 ⚡🔥
+# Full DataSet 📁 ⚡🔥
 Here in Hamtech Company, we decided to open source our ASR dataset. This Dataset is near 200Gb of voice plus CSV file which includes the transcription(some files contain txt file not csv). you can find a column named Confidence_level, this means how much the transcription is reliable, here is the, you can use LM(language models) or any other idea to clean them or any other ideas. . In conclusion :
 
 * You may use some techniques ( like using LMs, using annotator, etc. ) to clean more the transcription
@@ -103,12 +85,24 @@ Here in Hamtech Company, we decided to open source our ASR dataset. This Dataset
 * wav files are nearly 200Gb. 
 * voices format is : format : Wav / channels : mono/ sample_rate : 16000 Hz/ 
 
-Links : 
+<br> 
+Note : 9 Gb of data is lost. :( 
 
+Links : 
+<br>
+Version 1 data content is like : WavFile+TxtFile | Version 2 data content is like : ZipFile+CsvFile
+- Dataset_part_1_v1 : https://drive.google.com/drive/folders/1jdR4joj1BsU_LYHXriUW0xT4tgXicaqv?usp=share_link
+- Dataset_part_2_v1 : https://drive.google.com/drive/folders/1tVOrcwpxVcfrON5t9rdFSLZ5LNwJuCrV?usp=share_link
+- Dataset_part_3_v1 : https://drive.google.com/drive/folders/1FWY3MTrpMF-WrqFbMSM-fNmLn0FiUoNx?usp=share_link
+- Dataset_part_4_v1 : Data is lost :( ( this part of data was 9.7 Gb of zipped wav/txt files )
 - Dataset_part_1_v2 : https://drive.google.com/drive/folders/1ZsTMb_V-UAXxxi-wRE-g4hXXntonA_P3?usp=share_link
 - Dataset_part_2_v2 : https://drive.google.com/drive/folders/1eAPjF_DVU9j4nQ8S0aWQTbCbTI5sBrYp?usp=share_link
 - Dataset_part_3_v2 : https://drive.google.com/drive/folders/1rMNYwKtkyz8tprhwErrcDT-TLKtWA0OB?usp=share_link
 - Dataset_part_4_v2 : https://drive.google.com/drive/folders/1Lxq8ouA6UWEOkHfNjxJ7Kf5k51D5t2V8?usp=share_link
+
+<br>
+
+
 
 NOTE : if you need more tips dont hesitate to email me  : masoudparpanchi@gmail.com
 
@@ -125,10 +119,13 @@ Here in Hamtech Company, we decided to open source a challenging part of our ASR
 * Google drive dataset URL is https://drive.google.com/drive/folders/1BLOYLBOUSWI50k4RTnpTc7Ni4rYxjVi2?usp=sharing
 * to download just the CSV file check Dataset folder in this repo or the [google drive link ](https://drive.google.com/file/d/1vqvn0F0YYhEFbzLgP9wJ36vyInUnO5b5/view?usp=sharing)
 
-NOTE: IF YOU NEED MORE DATA FOR YOUR EDUCATIONAL/RESEARCH PURPOSES Contact us. (email : masoudparpanchi@gmail.com / insta : hamtechai / Website : https://ham-tech.ir/ )
-
 # Mozilla Deep Speech
-### clone and download common voice dataset 
+
+Last checkpoint of trained Speech to text ( These are not ready to use for commercial usecases. only a finetuned model for you, to use it in your own project : 
+- Mozzila deepspeech checkpoints ( WARNING : Check experiments log for hyperparametrs when you want to finetune using these checkpoints ) : https://drive.google.com/drive/folders/1FyLFudV_o71WeBQEQIn_-GficBpEMIzM?usp=share_link
+- pb format of checkpoint : https://drive.google.com/file/d/1RhISAEUwG9MwkLIFyrb1sIFi4UhNTKL6/view?usp=share_link
+
+### Start Using deepspeech : clone and download common voice dataset 
 To use this toolkit you must first do what  [this link ](https://deepspeech.readthedocs.io/en/latest/TRAINING.html) says or follow short Installation blow.
 
 Currently we are using DeepSpeech V0.9.3
@@ -146,7 +143,7 @@ pip install tensorflow-gpu==1.15.4
 After cloning and install dependecies you need [common voice dataset](https://voice.mozilla.org/en/datasets).
 Download the proper language and then preprocessing. all the steps for preprocess common voice dataset is documented in [here](https://deepspeech.readthedocs.io/en/latest/TRAINING.html) too.
 
-- Start training
+- Start training from scratch ( no pretrained model)
 ```
 ‫‪python3‬‬ ‫‪DeepSpeech.py‬‬ ‫‪--train_files‬‬ ‫‪../data/CV/en/clips/train.csv‬‬ ‫‪--dev_files‬‬ \
 ‫‪../data/CV/en/clips/dev.csv‬‬ ‫‪--test_files‬‬ ‫‪../data/CV/en/clips/test.csv‬‬
@@ -176,11 +173,16 @@ text file size : 2GB
 
 test file to optimize : 20M
 
-
-TIP : You can use just this language model :| not any other.
+<br>
+kenlm checkpoint link (This checkpoint is just a toy language model. trained on 2.5 Gb of Persian txt but not deep optimization ): https://drive.google.com/file/d/1IGL_SXNQdYINWEP93JnbAw1NjxtmZ-Hw/view?usp=share_link
 <br>
 
-after all these steps it means you have your dataset ready and you want to train . if you want to train on English there is no more steps **BUT** if you are in another language ( like persian ) you need to check transfer learning part of [this link](https://deepspeech.readthedocs.io/en/latest/TRAINING.html#transfer-learning-new-alphabet)
+txt dataset to train kenlm can be found here ( you can find near 80 Gb of Persian txt there ): https://nlpdataset.ir/farsi/raw_text_corpora.html
+
+<br>
+<br>
+
+after all these steps it means you have your dataset ready and you want to train . if you want to train on English there is no more steps **BUT** if you are in another language ( like Persian ) you need to check transfer learning part of [this link](https://deepspeech.readthedocs.io/en/latest/TRAINING.html#transfer-learning-new-alphabet)
 TIP : don't forget to change alphabete.txt
 
 Question : can I use Other languages checkpoints to start transfer learning? Sure, do it. But remember to drop weights of last N layers.
@@ -188,6 +190,12 @@ Question : can I use Other languages checkpoints to start transfer learning? Sur
 you may need the meaning of flags to use all the abilities of mozilla deep speech. [check their Documentation](https://deepspeech.readthedocs.io/en/v0.9.3/Flags.html)
 
 Tip : if you faced with CUDA/CudNN errors. try to use conda and install proper versions.
+
+#### Where to find Persian Pretrained Checkpoints : 
+<br>
+Last checkpoint of trained Speech to text ( These are not ready to use for commercial usecases. only a finetuned model for you, to use it in your own project : 
+- Mozzila deepspeech checkpoints ( WARNING : Check experiments log for hyperparametrs when you want to finetune using these checkpoints ) : https://drive.google.com/drive/folders/1FyLFudV_o71WeBQEQIn_-GficBpEMIzM?usp=share_link
+- pb format of checkpoint : https://drive.google.com/file/d/1RhISAEUwG9MwkLIFyrb1sIFi4UhNTKL6/view?usp=share_link
 
 <br>
 <br>
@@ -203,8 +211,6 @@ their repo is really complete and you can pass their steps to train a model but 
 * the dataset in this repo is a little different. you must have tsv file. and columns hav different names and values
 *   (optional) to prepare your own dataset for this approach you can use my script. it is available in github
 
-### Language model
-in this repo you can use any language model. even kenlm.
 
 
 <br>
@@ -212,15 +218,13 @@ in this repo you can use any language model. even kenlm.
 
 ## Wav2vec 2.0
 using facebook fairseq toolkit
-SOON 
+<br>
+this checkpoint of wav2vec2 is trained on 30 Gb of Speech dataset( all data with 90percent and higher confidence ): https://drive.google.com/file/d/1DX4R3wyjDiDyQ6-0EKv_0P3WV_co13H6/view?usp=share_link
 
 
 <br>
 <hr>
 
-## Jasper
-using Nvidia NeMo Toolkit
-Soon
 
 ## My Own Implementations
 
@@ -255,19 +259,9 @@ the codes are developed to use commonvoice data. make sure your data are in that
 
 # Hyperparameters
 
-WIll be uploaded soon
+All experiments and all hyperparameters : https://drive.google.com/file/d/1h7DhMsS_AGAguKypI_jhjv3JNT2Naemq/view?usp=share_link
 
 <br>
-
-# Language model
-
-WIll be uploaded soon
-
-<br>
-
-# Language model dataset
-
-WIll be uploaded soon
 
 <br>
 
@@ -281,4 +275,4 @@ Visit our wiki page for more info about Tutorials, useful Links, Hardware Info, 
 
 If you want to help us for better models and new approaches, please contact us, we will be happy
 <br>
-Email : Soon...
+Email :  masoudparpanchi@gmail.com
