@@ -57,7 +57,7 @@ if you don't know any of these stuff you can check Wiki page there are many link
 
   <tr>
    <td width="25%">Deep Speech 1 : Mozilla + Transfer Learning (third try) </td>
-   <td width="25%"> common_voice + tv programms + radio programs (totally 1000h) </td>
+   <td width="25%"> common_voice + tv programms + radio programs (totally +1000h) </td>
  <td width="25%"> 22 </td>
  </tr>
 
