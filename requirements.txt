@@ -3,6 +3,6 @@ pandas==1.1.4
 numpy==1.22.0
 pydub==0.24.1
 tqdm==4.53.0
-requests==2.22.0
+requests==2.31.0
 beautifulsoup4==4.9.3
 scikit_learn==0.24.1
